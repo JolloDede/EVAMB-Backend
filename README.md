@@ -10,7 +10,7 @@
   * [X] Add Post /Messages route
   
 * [ ] Auth
-  * [ ]Add auth router
+  * [ ] Add auth router
   * [ ] Create user with POST /auth/signup
     * [ ] validate required fields
     * [ ] Check if username is unique
