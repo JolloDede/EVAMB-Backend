@@ -5,6 +5,7 @@ const cors = require('cors')
 const db = require('../db/connection');
 const app = express();
 const messages = db.get('messages');
+const auth = require('./auth');
 
 app.use(volleyball);
 app.use(cors());
@@ -23,11 +24,6 @@ app.get('/messages', (req, res, next) => {
             res.json({ messages });
         }).catch(next);
 });
-
-function isValidMessage(message){
-    return message.name && message.name.toString().trim() !== '' && message.name.toString().trim().length <= 50 &&
-    message.content && message.content.toString().trim() !== '' && message.content.toString().trim().length <= 140;
-}
 
 app.post('/messages', (req, res, next) => {
     if(isValidMessage(req.body)){
@@ -48,6 +44,14 @@ app.post('/messages', (req, res, next) => {
         });
     }
 });
+
+app.use('/auth', auth);
+
+
+function isValidMessage(message){
+    return message.name && message.name.toString().trim() !== '' && message.name.toString().trim().length <= 50 &&
+    message.content && message.content.toString().trim() !== '' && message.content.toString().trim().length <= 140;
+}
 
 app.listen(5000, () => {
     console.log('Listening on http://localhost:5000');
