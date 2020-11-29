@@ -1,10 +1,9 @@
 const express = require('express');
 const volleyball = require('volleyball');
-const monk = require('monk');
 const cors = require('cors')
 
+const db = require('../db/connection');
 const app = express();
-const db = monk('localhost/EVAMB');
 const messages = db.get('messages');
 
 app.use(volleyball);
